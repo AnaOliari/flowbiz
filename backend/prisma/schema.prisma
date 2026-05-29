@@ -4,22 +4,24 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
-  role      String   @default("user")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  password     String
+  role         String   @default("user")
+  refreshToken String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   opportunities Opportunity[]
 }
@@ -38,11 +40,12 @@ model Client {
 }
 
 model Opportunity {
-  id          String   @id @default(uuid())
-  title       String
-  description String?
-  value       Float
-  status      String   @default("lead")
+  id                String    @id @default(uuid())
+  title             String
+  description       String?
+  value             Float
+  status            String    @default("OPEN")
+  expectedCloseDate DateTime?
 
   clientId String
   client   Client @relation(fields: [clientId], references: [id])

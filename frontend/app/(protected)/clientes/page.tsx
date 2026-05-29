@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import ClientTable from './_components/client-table';
 import ClientModal from './_components/client-modal';
-import DeleteDialog from './_components/delete-dialog';
+import DeleteDialog from '@/components/delete-dialog';
 import ToastList from '@/components/toast';
 import { useToast } from '@/hooks/use-toast';
 
@@ -166,7 +166,7 @@ export default function ClientesPage() {
 
       <DeleteDialog
         open={deleteDialogOpen}
-        clientName={deletingClient?.name ?? ''}
+        entityName={deletingClient?.name ?? ''}
         loading={actionLoading}
         onConfirm={handleDelete}
         onCancel={() => {

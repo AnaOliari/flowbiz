@@ -4,13 +4,13 @@ import { useEffect } from 'react';
 
 interface DeleteDialogProps {
   open: boolean;
-  clientName: string;
+  entityName: string;
   loading: boolean;
   onConfirm: () => void;
   onCancel: () => void;
 }
 
-export default function DeleteDialog({ open, clientName, loading, onConfirm, onCancel }: DeleteDialogProps) {
+export default function DeleteDialog({ open, entityName, loading, onConfirm, onCancel }: DeleteDialogProps) {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') onCancel();
@@ -25,10 +25,10 @@ export default function DeleteDialog({ open, clientName, loading, onConfirm, onC
     <div className="fixed inset-0 z-40 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/40" onClick={onCancel} />
       <div className="relative z-10 w-full max-w-sm bg-white rounded-2xl shadow-xl p-6 mx-4">
-        <h2 className="text-lg font-semibold text-gray-900 mb-2">Excluir cliente</h2>
+        <h2 className="text-lg font-semibold text-gray-900 mb-2">Confirmar exclusão</h2>
         <p className="text-sm text-gray-500 mb-6">
           Tem certeza que deseja excluir{' '}
-          <span className="font-medium text-gray-700">{clientName}</span>? Esta ação não pode ser desfeita.
+          <span className="font-medium text-gray-700">{entityName}</span>? Esta ação não pode ser desfeita.
         </p>
         <div className="flex justify-end gap-2">
           <button

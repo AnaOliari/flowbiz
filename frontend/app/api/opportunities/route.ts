@@ -12,12 +12,12 @@ async function getToken(): Promise<string> {
 export async function GET() {
   const token = await getToken();
 
-  const res = await fetch(`${BACKEND_URL}/clients`, {
+  const res = await fetch(`${BACKEND_URL}/opportunities`, {
     headers: { Authorization: `Bearer ${token}` },
     cache: 'no-store',
   });
 
-  const body = await res.json().catch(() => ({ message: 'Erro ao buscar clientes' }));
+  const body = await res.json().catch(() => ({ message: 'Erro ao buscar oportunidades' }));
   return NextResponse.json(body, { status: res.status });
 }
 
@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
   const token = await getToken();
   const body = await request.json();
 
-  const res = await fetch(`${BACKEND_URL}/clients`, {
+  const res = await fetch(`${BACKEND_URL}/opportunities`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -34,6 +34,6 @@ export async function POST(request: NextRequest) {
     body: JSON.stringify(body),
   });
 
-  const data = await res.json().catch(() => ({ message: 'Erro ao criar cliente' }));
+  const data = await res.json().catch(() => ({ message: 'Erro ao criar oportunidade' }));
   return NextResponse.json(data, { status: res.status });
 }

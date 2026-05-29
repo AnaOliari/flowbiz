@@ -17,7 +17,7 @@ export async function PATCH(
   const token = await getToken();
   const body = await request.json();
 
-  const res = await fetch(`${BACKEND_URL}/clients/${id}`, {
+  const res = await fetch(`${BACKEND_URL}/opportunities/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export async function PATCH(
     body: JSON.stringify(body),
   });
 
-  const data = await res.json().catch(() => ({ message: 'Erro ao atualizar cliente' }));
+  const data = await res.json().catch(() => ({ message: 'Erro ao atualizar oportunidade' }));
   return NextResponse.json(data, { status: res.status });
 }
 
@@ -37,7 +37,7 @@ export async function DELETE(
   const { id } = await params;
   const token = await getToken();
 
-  const res = await fetch(`${BACKEND_URL}/clients/${id}`, {
+  const res = await fetch(`${BACKEND_URL}/opportunities/${id}`, {
     method: 'DELETE',
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -46,6 +46,6 @@ export async function DELETE(
     return new NextResponse(null, { status: 204 });
   }
 
-  const data = await res.json().catch(() => ({ message: 'Erro ao excluir cliente' }));
+  const data = await res.json().catch(() => ({ message: 'Erro ao excluir oportunidade' }));
   return NextResponse.json(data, { status: res.status });
 }

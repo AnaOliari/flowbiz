@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = process.env.BACKEND_URL ?? 'http://localhost:3000';
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 const BASE_COOKIE_OPTIONS = {
